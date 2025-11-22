@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVEIL - Femmes de Mopti | Réseau Éducatif</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. VARIABLES & CHARTE GRAPHIQUE --- */
+        :root {
+            /* Palette Principale */
+            --vert-sage: #8A9B68;
+            --orange-terreux: #D4A574;
+            
+            /* Palette Secondaire */
+            --brun-profond: #5D4037;
+            --beige-clair: #F5F5F5;
+            --blanc: #FFFFFF;
+            
+            /* Typographie */
+            --font-titre: 'Cormorant Garamond', serif;
+            --font-corps: 'Open Sans', sans-serif;
+        }
+
+        /* --- 2. RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-corps);
+            background-color: var(--beige-clair);
+            color: var(--brun-profond);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            color: var(--vert-sage);
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: var(--font-corps);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--vert-sage);
+            color: var(--blanc);
+            border: 2px solid var(--vert-sage);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--vert-sage);
+        }
+
+        .btn-secondary {
+            background-color: var(--orange-terreux);
+            color: var(--blanc);
+            border: 2px solid var(--orange-terreux);
+        }
+
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: var(--orange-terreux);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .text-center { text-align: center; }
+
+        /* Motif Baobab subtil en fond (CSS pur) */
+        .bg-pattern {
+            background-image: radial-gradient(var(--orange-terreux) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.1;
+        }
+
+        /* --- 3. HEADER --- */
+        header {
+            background-color: var(--blanc);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 60px; /* Ajustement selon l'image fournie */
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: var(--font-titre);
+            font-size: 1.5rem;
+            color: var(--brun-profond);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--vert-sage);
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--brun-profond);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--orange-terreux);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--brun-profond);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            margin-top: 80px;
+            height: 85vh;
+            background: linear-gradient(rgba(93, 64, 55, 0.7), rgba(138, 155, 104, 0.6)), url('https://images.unsplash.com/photo-1531983412531-1f49a365ffed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'); /* Image générique représentative */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--blanc);
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            color: var(--blanc);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* --- 5. À PROPOS (Mission) --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--brun-profond);
+        }
+
+        .highlight {
+            color: var(--vert-sage);
+            font-weight: 700;
+        }
+
+        .about-card {
+            background: var(--blanc);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--orange-terreux);
+            margin-top: 20px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 10px 10px 0 var(--vert-sage);
+        }
+
+        /* --- 6. NOS VALEURS & ACTIVITÉS --- */
+        .values-section {
+            background-color: var(--vert-sage);
+            color: var(--blanc);
+        }
+
+        .values-section h2 {
+            color: var(--blanc);
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .value-card i {
+            font-size: 3rem;
+            color: var(--orange-terreux);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: var(--blanc);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* --- 7. ACTIVITÉS --- */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .activity-card {
+            background: var(--blanc);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            height: 200px;
+            background-color: #ddd;
+            position: relative;
+        }
+        
+        /* Couleurs spécifiques pour les cartes */
+        .card-edu { background-color: #E8F5E9; }
+        .card-sol { background-color: #FFF3E0; }
+        .card-spi { background-color: #EFEBE9; }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-body h3 {
+            color: var(--brun-profond);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            position: absolute;
+            bottom: -25px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--orange-terreux);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* --- 8. ADHÉSION --- */
+        .membership-section {
+            background-color: var(--blanc);
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .price-card {
+            background: var(--beige-clair);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 300px;
+            position: relative;
+            border: 1px solid #ddd;
+            transition: 0.3s;
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--vert-sage);
+            transform: scale(1.05);
+            background: white;
+            box-shadow: 0 10px 30px rgba(138, 155, 104, 0.2);
+        }
+
+        .price-card h3 {
+            color: var(--brun-profond);
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--vert-sage);
+            font-family: var(--font-titre);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #777;
+            font-family: var(--font-corps);
+        }
+
+        .features-list {
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .features-list li i {
+            color: var(--vert-sage);
+            margin-right: 10px;
+        }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            background-color: var(--brun-profond);
+            color: var(--beige-clair);
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--orange-terreux);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--orange-terreux);
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            color: var(--blanc);
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--orange-terreux);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            font-family: var(--font-corps);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                gap: 0;
+                flex-direction: column;
+                background-color: var(--blanc);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-item {
+                margin: 16px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .price-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <img src="REVEIL Femmes de Mopti.png" alt="Logo REVEIL Mopti">
+                    <div class="logo-text">REVEIL<br><span>Femmes de Mopti</span></div>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#accueil" class="nav-link">Accueil</a></li>
+                    <li class="nav-item"><a href="#apropos" class="nav-link">Qui sommes-nous</a></li>
+                    <li class="nav-item"><a href="#activites" class="nav-link">Activités</a></li>
+                    <li class="nav-item"><a href="#adhesion" class="nav-link">Adhésion</a></li>
+                    <li class="nav-item"><a href="#contact" class="btn btn-primary">Nous rejoindre</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="container hero-content">
+            <h1>Notre main tendue,<br>vers un avenir radieux</h1>
+            <p>Réseau Éducatif des Valeurs Éthiques Islamiques des Femmes de Mopti</p>
+            <a href="#adhesion" class="btn btn-secondary">Devenir Membre</a>
+        </div>
+    </section>
+
+    <section id="apropos" class="section-padding ">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Femmes en apprentissage">
+                </div>
+                <div class="about-text">
+                    <h2>L'Éducation qui élève</h2>
+                    <p>L'association <strong>REVEIL - Femmes de Mopti</strong> est née d'une volonté profonde de contribuer à l'épanouissement des femmes et des jeunes filles de notre région à travers l'éducation et les valeurs éthiques.</p>
+                    <br>
+                    <div class="about-card">
+                        <h4 class="highlight">Notre Mission</h4>
+                        <p>Promouvoir l'éducation islamique, renforcer les capacités des femmes dans les domaines spirituels et sociaux, et préserver nos valeurs de solidarité et de partage.</p>
+                    </div>
+                    <br>
+                    <p><i class="fas fa-quote-left" style="color:var(--orange-terreux);"></i> <em>Nous croyons en une communauté où chaque femme est une actrice de changement positive.</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding values-section">
+        <div class="container">
+            <h2>Nos Valeurs Fondamentales</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Savoir & Éducation</h3>
+                    <p>Transmission du savoir authentique et promotion de l'excellence éducative.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-hands-holding-circle"></i>
+                    <h3>Solidarité</h3>
+                    <p>Une main tendue pour l'entraide et le soutien mutuel au sein de la communauté.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Éthique</h3>
+                    <p>Respect des principes islamiques et comportement exemplaire.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Communauté</h3>
+                    <p>Renforcement des liens sociaux à Mopti et développement durable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activites" class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2>Nos Domaines d'Action</h2>
+                <p>Un programme complet pour l'épanouissement intégral</p>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="card-header" style="background: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover;">
+                        <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    </div>
+                    <div class="card-body card-edu">
+                        <h3>Éducation & Formation</h3>
+                        <p>Cours d'éducation islamique hebdomadaires, ateliers de formation pratiques et séminaires pour les jeunes filles et les femmes.</p>
+                    </div>
+                </div>
+
+                <div class="activity-card">
+                    <div class="card-header" style="background: url('https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover;">
+                        <div class="card-icon"><i class="fas fa-heart"></i></div>
+                    </div>
+                    <div class="card-body card-sol">
+                        <h3>Action Sociale</h3>
+                        <p>Fonds de solidarité, visites aux malades, activités caritatives et soutien aux membres en difficulté.</p>
+                    </div>
+                </div>
+
+                <div class="activity-card">
+                    <div class="card-header" style="background: url('https://images.unsplash.com/photo-1519682337058-a94d519337bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover;">
+                        <div class="card-icon"><i class="fas fa-star-and-crescent"></i></div>
+                    </div>
+                    <div class="card-body card-spi">
+                        <h3>Culture & Spiritualité</h3>
+                        <p>Conférences mensuelles, retraites spirituelles annuelles et célébrations religieuses conformes à nos valeurs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="adhesion" class="section-padding membership-section ">
+        <div class="container">
+            <div class="text-center">
+                <h2>Devenir Membre</h2>
+                <p>Rejoignez la famille REVEIL et participez à notre mission</p>
+            </div>
+
+            <div class="pricing-container">
+                <div class="price-card">
+                    <h3>Jeunes Filles</h3>
+                    <div class="price">1 000 <span>FCFA/an</span></div>
+                    <p style="margin-top:10px; color:#666;">10 à 21 ans</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Droit de vote aux AG</li>
+                        <li><i class="fas fa-check"></i> Accès prioritaire conférences</li>
+                        <li><i class="fas fa-check"></i> Éligibilité au Bureau</li>
+                        <li><i class="fas fa-check"></i> Réseau de solidarité</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">S'inscrire</a>
+                </div>
+
+                <div class="price-card featured">
+                    <div style="position:absolute; top:0; right:0; background:var(--vert-sage); color:white; padding:5px 15px; font-size:0.8rem; border-bottom-left-radius:10px; border-top-right-radius:10px;">Populaire</div>
+                    <h3>Adultes</h3>
+                    <div class="price">2 500 <span>FCFA/an</span></div>
+                    <p style="margin-top:10px; color:#666;">22 ans et plus</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Droit de vote aux AG</li>
+                        <li><i class="fas fa-check"></i> Accès prioritaire conférences</li>
+                        <li><i class="fas fa-check"></i> Éligibilité au Bureau</li>
+                        <li><i class="fas fa-check"></i> Réseau de solidarité</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">S'inscrire</a>
+                </div>
+
+                <div class="price-card">
+                    <h3>Bienfaitrice</h3>
+                    <div class="price">10 000+ <span>FCFA</span></div>
+                    <p style="margin-top:10px; color:#666;">Contribution volontaire</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Soutien aux activités</li>
+                        <li><i class="fas fa-check"></i> Statut honorifique</li>
+                        <li><i class="fas fa-check"></i> Invitation spéciale</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Faire un don</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 40px;">
+                <h2>Contactez-nous</h2>
+                <p>Pour toute demande d'information ou d'adhésion</p>
+            </div>
+            
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+                <div style="background:white; padding:20px; border-radius:10px; text-align:center; width:300px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+                    <i class="fas fa-map-marker-alt" style="font-size:2rem; color:var(--vert-sage); margin-bottom:15px;"></i>
+                    <h4>Adresse</h4>
+                    <p>Mopti, République du Mali</p>
+                </div>
+                <div style="background:white; padding:20px; border-radius:10px; text-align:center; width:300px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+                    <i class="fas fa-phone" style="font-size:2rem; color:var(--vert-sage); margin-bottom:15px;"></i>
+                    <h4>Téléphone</h4>
+                    <p>+223 78 83 68 94</p>
+                   
+                </div>
+                <div style="background:white; padding:20px; border-radius:10px; text-align:center; width:300px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+                    <i class="fas fa-envelope" style="font-size:2rem; color:var(--vert-sage); margin-bottom:15px;"></i>
+                    <h4>Email</h4>
+                    <p>reveilfemmesdemopti@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>XX
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>REVEIL - Femmes de Mopti</h4>
+                    <p>Un réseau engagé pour l'éducation, les valeurs éthiques et l'avenir des femmes à Mopti.</p>
+                    <br>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/profile.php?id=61584266244076"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/+22378836894"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens Rapides</h4>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#apropos">À propos</a></li>
+                        <li><a href="#activites">Nos activités</a></li>
+                        <li><a href="#adhesion">Adhésion</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Informations Légales</h4>
+                    <ul>
+                        <li><a href="#">Statuts</a></li>
+                        <li><a href="#">Règlement Intérieur</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 REVEIL - Femmes de Mopti. Tous droits réservés. <br> <em>Notre main tendue, vers un avenir radieux.</em></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+
+        // Animation au scroll (Fade In simple)
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.activity-card, .about-text, .price-card').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
